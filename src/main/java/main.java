@@ -1,4 +1,5 @@
-package target.classes;
+
+
 import java.util.Scanner;
 import java.util.*;
 
@@ -37,6 +38,7 @@ public class main {
         String postfixExpression = infixToPostfix(userMathematicalExpression);
         int result = evaluatePostfix(postfixExpression);
         System.out.println(result);
+        input.close();
 
 
 
@@ -51,6 +53,10 @@ public class main {
      *
      */
 	}
+
+    public main(){
+    }
+
 
 	static boolean isValidOperatorCheck(char input){
         switch(input){
@@ -117,7 +123,7 @@ static boolean isValidNumberCheck(char input){
      * @param input
      * @return boolean,  True if there is a bracket and false if there is no bracket
      */
-    boolean isValidBracket(char input){
+    static boolean isValidBracket(char input){
         if ((input == '}') || (input == '{')){
             return true;
         }
@@ -137,7 +143,7 @@ static boolean isValidNumberCheck(char input){
      * @param input Input from the user at the start of the program
      * @return boolean (True or False)
      */
-    boolean isValidExpression(String input){
+    static boolean isValidExpression(String input){
 
         // Creating array of string length
         // using length() method
