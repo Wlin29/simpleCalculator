@@ -7,7 +7,9 @@ import org.junit.runners.JUnit4;
 
 
 @RunWith(JUnit4.class)
+
 public class calculatorTest {
+    @Test
     public void validation() {
         String input = "2+2";
         assertEquals("Checking Validation function", true, main.isValidExpression(input));
