@@ -15,7 +15,7 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
-      - name: Compile main.java
-        run: mvn compile
-      - name: Test calculatorTest.java
-        run: mvn test
+      # - name: Compile main.java
+      #   run: mvn compile
+      # - name: Test calculatorTest.java
+      #   run: mvn test
