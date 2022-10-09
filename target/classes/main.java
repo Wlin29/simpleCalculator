@@ -53,7 +53,18 @@ public class main {
 	}
 
 	static boolean isValidOperatorCheck(char input){
-        return true;
+        switch(input){
+            case '+':
+                return true;
+            case '-':
+                return true;
+            case '*':
+                return true;
+            case '/':
+                return true;
+            default:
+                return false;
+        }
     }
     
 	// todo: no second operator except if the second character is a minus
@@ -66,7 +77,39 @@ public class main {
  * @return a boolean
  */
 static boolean isValidNumberCheck(char input){
-        return true;
+        switch(input){
+            case '1':
+                return true;
+
+            case '2':
+                return true;
+            
+            case '3':
+                return true;
+            
+            case '4':
+                return true;
+            
+            case '5':
+                return true;
+
+            case '6':
+                return true;
+            
+            case '7':
+                return true;
+            
+            case '8':
+                return true;
+
+            case '9':
+                return true;
+            
+            case '0':
+                return true;
+            default:
+                return false;
+        }
         // Todo : Try and replicate the top and just have a valid number check. 
     }
     /**
@@ -74,9 +117,13 @@ static boolean isValidNumberCheck(char input){
      * @param input
      * @return boolean,  True if there is a bracket and false if there is no bracket
      */
-    static boolean isValidBracket(char input){
-        return true;
-
+    boolean isValidBracket(char input){
+        if ((input == '}') || (input == '{')){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**
@@ -90,8 +137,20 @@ static boolean isValidNumberCheck(char input){
      * @param input Input from the user at the start of the program
      * @return boolean (True or False)
      */
-    static boolean isValidExpression(String input){  
-        return true;      
+    boolean isValidExpression(String input){
+
+        // Creating array of string length
+        // using length() method
+        char[] ch = new char[input.length()];
+
+        // Copying character by character into array
+        // using for each loop
+        for (int i = 0; i < input.length(); i++) {
+            if (!(isValidBracket(input.charAt(i)) || isValidNumberCheck(input.charAt(i)) || isValidOperatorCheck(input.charAt(i)))){
+                return false;
+            }     
+        }
+        return true;        
     }
 
     /**
