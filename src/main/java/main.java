@@ -240,6 +240,47 @@ static boolean isValidNumberCheck(char input){
      * @return the answer to the sum
      */
 
+    static int evaluatePostfix(String input){
+        String[] inputArray = input.split(" ");       // split the input string by spaces
+        Stack<Integer> stack = new Stack<Integer>();
 
+        for(int i=0; i< inputArray.length; i++){            // scan through the array of inputs
+            String token = inputArray[i];
+
+            if(isValidNumberCheck(token.charAt(0))){        // if token is an operand, push to stack
+                stack.push(Integer.parseInt(token));
+            }
+            else{                                           // else if token is an operator, pop two operands and perform the calculation
+                int number1 = stack.pop();
+                int number2 = stack.pop();
+
+                switch(token){
+                    case"+":
+                        int result = number2 + number1;
+                        stack.push(result);
+                        break;
+                    case"-":
+                        result = number2 - number1;
+                        stack.push(result);
+                        break;
+                    case"*":
+                        result = number2 * number1;
+                        stack.push(result);
+                        break;
+                    case"/":
+                        if(number1 == 0){                   // make sure to not divide by 0
+                            return -420;
+                        }
+                        else{
+                            result = number2 / number1;
+                            stack.push(result);
+                            break;
+                        }
+                }
+            }
+        }
+        int result = stack.pop();                           // the remaining number on the stack is the result
+        return result;
+    }
 
 }
