@@ -1,4 +1,4 @@
-
+package src.main.java;
 
 import java.util.Scanner;
 import java.util.*;
@@ -74,8 +74,6 @@ public class main {
                 return false;
         }
     }
-    
-	// todo: no second operator except if the second character is a minus
 
 /**
  * Valid number check just takes a number and checks to see if it is a valid char.
@@ -118,7 +116,6 @@ static boolean isValidNumberCheck(char input){
             default:
                 return false;
         }
-        // Todo : Try and replicate the top and just have a valid number check. 
     }
     /**
      * This statement checks and sees if there is a bracket 
@@ -170,9 +167,47 @@ static boolean isValidNumberCheck(char input){
      */
 
     static String infixToPostfix(String input){
-        return "";
-       }
+        Stack<String> stack = new Stack<>();
+        String postfix = "";
 
+        for(int i=0; i<input.length(); i++){                                            // for every item in the infix expression
+            char token = input.charAt(i);
+            if(isValidNumberCheck(token)){                                              // if(token is a number)
+                postfix = postfix + input.charAt(i);                                    //      add token to postfix expression
+                if(i+1<input.length() && !isValidNumberCheck(input.charAt(i+1))){       //      if(next character is an operand)
+                    postfix = postfix + " ";                                            //          add a space to separate the operators
+                }
+            }
+            else if(token == '('){                                                      // else if(token == "(")
+                stack.push("(");                                                   //       push "(" to the stack
+            }
+            else if(isValidOperatorCheck(token)){                                       // else if(token is an operator)
+                while(stack.size()>0 && (stack.peek().charAt(0)>=precedence(token))){   //      while(top of stack is an operator with greater or equal precedence)
+                    String operator = stack.pop();                                      //          pop and add to postfix expression
+                    postfix = postfix + operator;
+                    if(i+1<input.length()){
+                        postfix = postfix + " ";                                        //  add a space after the operand unless it is the end of the string
+                    }
+                }
+                stack.push(String.valueOf(token));
+            }
+            else if(token == ')'){                                                      // else if(token == ")")
+                while(stack.peek() != "("){                                             //       while(top of stack != "(")
+                    String character = stack.pop();                                     //           pop and add to postfix expression
+                    postfix = postfix + character;
+                    if(i+1<input.length()){
+                        postfix = postfix + " ";                                        //  add a space after the operand unless it is the end of the string
+                    }
+                }
+                String bracket = stack.pop();                                           //       pop "("
+            }
+        }
+        while(!stack.empty()){                                                          // while(stack is not empty)
+            String character = stack.pop();                                             //       pop remaining characters and add to postfix expression
+            postfix = postfix + " " + character;
+        }
+        return postfix;
+    }
     /**
      *
      * Takes an operator and return it's precedence as an int, the higher precedence, the higher the integer.
@@ -183,7 +218,18 @@ static boolean isValidNumberCheck(char input){
      */
 
     static int precedence(char operator){
-        return 0;
+        if(operator=='+' || operator=='-'){
+            return 1;
+        }
+        else if(operator=='*' || operator=='/'){
+            return 2;
+        }
+        else if(operator=='^'){
+            return 3;
+        }
+        else{
+            return 0;
+        }
     }
 
     /**
@@ -194,9 +240,6 @@ static boolean isValidNumberCheck(char input){
      * @return the answer to the sum
      */
 
-    static int evaluatePostfix(String input){
-        
-        return 0;
-    }
+
 
 }
