@@ -3,7 +3,22 @@ name: Java CI
 on: [push]
 
 jobs:
-  build:
+  Validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Clean the target file
+        run: mvn clean
+      - name: Validate the target files
+        run: mvn validate 
+
+  Run Tests on Ubuntu:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,3 +36,41 @@ jobs:
         run: mvn compile
       - name: Test calculatorTest.java
         run: mvn test
+    
+  Run Tests On Windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Clean the target file
+        run: mvn clean
+      - name: Validate the target files
+        run: mvn validate 
+      - name: Compile main.java
+        run: mvn compile
+      - name: Test calculatorTest.java
+        run: mvn test    
+
+  Run Tests On Mac:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Clean the target file
+        run: mvn clean
+      - name: Validate the target files
+        run: mvn validate 
+      - name: Compile main.java
+        run: mvn compile
+      - name: Test calculatorTest.java
+        run: mvn test    
