@@ -18,7 +18,7 @@ jobs:
       - name: Validate the target files
         run: mvn validate 
 
-  Run Tests on Ubuntu:
+  Run_Tests_on_Ubuntu:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +37,7 @@ jobs:
       - name: Test calculatorTest.java
         run: mvn test
     
-  Run Tests On Windows:
+  Run_Tests_On_Windows:
     runs-on: windows-latest
 
     steps:
@@ -56,7 +56,7 @@ jobs:
       - name: Test calculatorTest.java
         run: mvn test    
 
-  Run Tests On Mac:
+  Run_Tests_On_Mac:
     runs-on: macos-latest
 
     steps:
