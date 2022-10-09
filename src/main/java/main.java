@@ -34,7 +34,9 @@ public class main {
 		Scanner input = new Scanner(System.in);  // Create a Scanner object
 	    System.out.println("Welcome to Arshad Mohammed and Wen Geng Lin's Calculator ");
 	    System.out.print("Input : ");
+        
 	    String userMathematicalExpression = input.nextLine();
+        System.out.println(isValidExpression(userMathematicalExpression));
         String postfixExpression = infixToPostfix(userMathematicalExpression);
         int result = evaluatePostfix(postfixExpression);
         System.out.println(result);
@@ -124,7 +126,7 @@ static boolean isValidNumberCheck(char input){
      * @return boolean,  True if there is a bracket and false if there is no bracket
      */
     static boolean isValidBracket(char input){
-        if ((input == '}') || (input == '{')){
+        if ((input == ')') || (input == '(')){
             return true;
         }
         else{
