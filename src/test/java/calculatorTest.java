@@ -10,7 +10,7 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class calculatorTest {
     @Test
-    public void validation() {
+    public void isValidExpression() {
         String input = "2+2";
         assertEquals("Checking Validation function", true, main.isValidExpression(input));
 
@@ -47,4 +47,44 @@ public class calculatorTest {
         input = "(aasd)";
         assertEquals("Checking Validation function", false, main.isValidExpression(input));
     }
+
+    @Test
+    public void duplicateOperationCharacters(){
+        String input = "1++1";
+        assertEquals("Checking that two operators in succession is invalid", true, main.duplicateOperationCharacters(input));
+        input = "1+1";
+        assertEquals("Checking that a correct expression passes is invalid", false, main.duplicateOperationCharacters(input));
+        input = "1+-";
+        assertEquals("look at it", true, main.duplicateOperationCharacters(input));
+        input = "--1";
+        assertEquals("I hate java", true, main.duplicateOperationCharacters(input));
+    }
+
+    @Test
+    public void infixToPostfixTest() {
+        String input = "1*2+3";
+        String output = "1 2 * 3 +";
+        assertEquals("Checking infixToPostFix function",output, main.infixToPostfix(input));
+    }
+
+    @Test
+    public void evaluatePostfixTest(){
+        String input = "1 2 * 3 +";
+        int output = 5;
+        assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
+
+        input = "2 2 +";
+        output = 4;
+        assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
+        
+        input = "1 1 -";
+        output = 0;
+        assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
+
+        input = "13 12 +";
+        output = 25;
+        assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
+    }
+
+
 }
