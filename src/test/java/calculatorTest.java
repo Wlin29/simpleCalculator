@@ -52,10 +52,13 @@ public class calculatorTest {
     public void duplicateOperationCharacters(){
         String input = "1++1";
         assertEquals("Checking that two operators in succession is invalid", true, main.duplicateOperationCharacters(input));
+
         input = "1+1";
-        assertEquals("Checking that a correct expression passes is invalid", false, main.duplicateOperationCharacters(input));
+        assertEquals("Checking that a correct expression outputs the correct answer", false, main.duplicateOperationCharacters(input));
+
         input = "1+-";
         assertEquals("look at it", true, main.duplicateOperationCharacters(input));
+
         input = "--1";
         assertEquals("I hate java", true, main.duplicateOperationCharacters(input));
     }
@@ -64,7 +67,12 @@ public class calculatorTest {
     public void infixToPostfixTest() {
         String input = "1*2+3";
         String output = "1 2 * 3 +";
-        assertEquals("Checking infixToPostFix function",output, main.infixToPostfix(input));
+        assertEquals("Checking infixToPostFix function with standard input",output, main.infixToPostfix(input));
+
+        input = "(2+3)*(4+5)";
+        output = "2 3 + 4 5 + *";
+        main.infixToPostfix(input);
+        assertEquals("Checking infixToPostFix function with brackets",output, main.infixToPostfix(input));
     }
 
     @Test
@@ -83,6 +91,10 @@ public class calculatorTest {
 
         input = "13 12 +";
         output = 25;
+        assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
+
+        input = "16 2 /";
+        output = 8;
         assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
     }
 
