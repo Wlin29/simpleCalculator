@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.util.Scanner;
 import java.util.*;
 
@@ -156,6 +154,28 @@ static boolean isValidNumberCheck(char input){
             }     
         }
         return true;        
+    }
+
+    /**
+     *
+     * Check if there are any duplicate operation characters
+     *
+     *
+     * @param input Input from the user at the start of the program
+     * @return boolean (True or False)
+     */
+
+    static boolean duplicateOperationCharacters(String input){
+        for(int i=1; i<input.length(); i++){
+            // if there are two operators in succession in the string
+            if(isValidOperatorCheck(input.charAt(i)) && isValidOperatorCheck(input.charAt(i-1))){
+                // if the second operator is not a minus, then the input is invalid
+                if(input.charAt(i)!='-'){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
