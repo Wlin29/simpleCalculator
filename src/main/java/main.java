@@ -3,59 +3,36 @@ import java.util.*;
 
 public class main {
 
-    /**
-     *  19:13 04/10/2022 - Arshad
-     *  
-     *  I have made a validation function. This function takes an expression 
-     *  and tells me if its "Calculatable" 
-     *  
-     *  In other words, 
-     *  "(1+20)*10" is valid
-     *  "1+21" is valid
-     *  "1+20=" is not valid (The '=' )
-     *  "1 + 20 + 5" is not valid (The ' ' empty space)
-     *  "@ + 50 + 2013" is not valid (The @ and ' ' empty space)
-     * 
-     *  Do you think these are okay parameters to determine whether 
-     *  the initial input is a valid "Calculatable" statement?
-     *  
-     *  Could you test this out and make sure it works, I didnt have time to test it. 
-     *  If you have extra time after that, you can try to convert it into postfix as you were mentioning it earlier.
-     *  
-     * 
-     * 
-     */ 
-
-
-
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);  // Create a Scanner object
 	    System.out.println("Welcome to Arshad Mohammed and Wen Geng Lin's Calculator ");
-	    System.out.print("Input : ");
-        
-	    String userMathematicalExpression = input.nextLine();
-        System.out.println(isValidExpression(userMathematicalExpression));
-        String postfixExpression = infixToPostfix(userMathematicalExpression);
-        int result = evaluatePostfix(postfixExpression);
-        System.out.println(result);
+        System.out.println("Plis don't enter negative numbers :) ");
+        System.out.print("Enter input or type quit to exit: ");
+        String userInput = input.nextLine();
+
+        // Quit loop if the input is "quit"
+        while(!userInput.equals("quit")){
+
+            // check that the string is valid
+            if(!isValidExpression(userInput)){
+                System.out.println("Invalid expression: unexpected string characters");
+            }
+            else if(duplicateOperationCharacters(userInput)){
+                System.out.println("Invalid expression: duplicate operation characters");
+            }
+            // String is valid, evaluate expression
+            else{
+                String postfix = infixToPostfix(userInput);
+                int result = evaluatePostfix(postfix);
+                System.out.println(result);
+            }
+
+            // Take in input
+            System.out.print("Enter input or type quit to exit: ");
+            userInput = input.nextLine();
+        }
         input.close();
-
-
-
-        
-    /**
-     * Hey Wen, So this function basically takes in an input and then outputs a boolean. 
-     * operatorErrorCheck 
-     * input: char and the char following that (input2)
-     * output: boolean
-     * 
-     * Checks if the char is either a +, -, * or / and outputs false otherwise
-     *
-     */
 	}
-
-    public main(){
-    }
 
 
 	static boolean isValidOperatorCheck(char input){
@@ -173,6 +150,14 @@ static boolean isValidNumberCheck(char input){
                 if(input.charAt(i)!='-'){
                     return true;
                 }
+                // if the string ends in "-", it is invalid
+                if(i==input.length()-1){
+                    return true;
+                }
+                // if the string starts with "-", it is invalid
+                if(i==1){
+                    return true;
+                }
             }
         }
         return false;
@@ -183,7 +168,7 @@ static boolean isValidNumberCheck(char input){
      * Takes the input string and converts it into postfix notation
      *
      * @param input Input from the user at the start of the program
-     * @return array of strings that contain the input in postfix notation with operators and operands separated by spaces
+     * @return string that contain the input in postfix notation with operators and operands separated by spaces
      */
 
     static String infixToPostfix(String input){
