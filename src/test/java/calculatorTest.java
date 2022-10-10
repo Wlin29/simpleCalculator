@@ -10,7 +10,7 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class calculatorTest {
     @Test
-    public void validation() {
+    public void isValidExpression() {
         String input = "2+2";
         assertEquals("Checking Validation function", true, main.isValidExpression(input));
 
@@ -49,32 +49,40 @@ public class calculatorTest {
     }
 
     @Test
+    public void duplicateOperationCharacters(){
+        String input = "1++1";
+        assertEquals("Checking that two operators in succession is invalid", true, main.duplicateOperationCharacters(input));
+        input = "1+1";
+        assertEquals("Checking that a correct expression passes is invalid", false, main.duplicateOperationCharacters(input));
+        input = "1+-";
+        assertEquals("look at it", true, main.duplicateOperationCharacters(input));
+        input = "--1";
+        assertEquals("I hate java", true, main.duplicateOperationCharacters(input));
+    }
+
+    @Test
     public void infixToPostfixTest() {
         String input = "1*2+3";
-        String output = "12*3+";
-        assertEquals("Checking infixToPostFix function",output, main.infixToPostfix(input));
-        
-        input = "(1+2)*(3-4)";
-        output = "12+34-*";
-        assertEquals("Checking infixToPostFix function",output, main.infixToPostfix(input));
-        
-        input = "1*(2*3+4*5)+6";
-        output = "123*45*+*6+";
+        String output = "1 2 * 3 +";
         assertEquals("Checking infixToPostFix function",output, main.infixToPostfix(input));
     }
 
     @Test
     public void evaluatePostfixTest(){
-        String input = "12*3+";
+        String input = "1 2 * 3 +";
         int output = 5;
         assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
 
-        input = "22+";
+        input = "2 2 +";
         output = 4;
         assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
         
-        input = "11-";
+        input = "1 1 -";
         output = 0;
+        assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
+
+        input = "13 12 +";
+        output = 25;
         assertEquals("Checking evaluate postfix expression",output, main.evaluatePostfix(input));
     }
 
