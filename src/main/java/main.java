@@ -6,7 +6,6 @@ public class main {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);  // Create a Scanner object
 	    System.out.println("Welcome to Arshad Mohammed and Wen Geng Lin's Calculator ");
-        System.out.println("Plis don't enter negative numbers :) ");
         System.out.print("Enter input or type quit to exit: ");
         String userInput = input.nextLine();
 
@@ -175,40 +174,40 @@ static boolean isValidNumberCheck(char input){
         Stack<String> stack = new Stack<>();
         String postfix = "";
 
-        for(int i=0; i<input.length(); i++){                                            // for every item in the infix expression
+        for(int i=0; i<input.length(); i++){                                                        // for every item in the infix expression
             char token = input.charAt(i);
-            if(isValidNumberCheck(token)){                                              // if(token is a number)
-                postfix = postfix + input.charAt(i);                                    //      add token to postfix expression
-                if(i+1<input.length() && !isValidNumberCheck(input.charAt(i+1))){       //      if(next character is an operand)
-                    postfix = postfix + " ";                                            //          add a space to separate the operators
+            if(isValidNumberCheck(token)){                                                          // if(token is a number)
+                postfix = postfix + input.charAt(i);                                                //      add token to postfix expression
+                if(i+1<input.length() && !isValidNumberCheck(input.charAt(i+1))){                   //      if(next character is an operand)
+                    postfix = postfix + " ";                                                        //          add a space to separate the operators
                 }
             }
-            else if(token == '('){                                                      // else if(token == "(")
-                stack.push("(");                                                   //       push "(" to the stack
+            else if(token == '('){                                                                  // else if(token == "(")
+                stack.push("(");                                                               //       push "(" to the stack
             }
-            else if(isValidOperatorCheck(token)){                                       // else if(token is an operator)
-                while(stack.size()>0 && (stack.peek().charAt(0)>=precedence(token))){   //      while(top of stack is an operator with greater or equal precedence)
-                    String operator = stack.pop();                                      //          pop and add to postfix expression
+            else if(isValidOperatorCheck(token)){                                                   // else if(token is an operator)
+                while(stack.size()>0 && (precedence(stack.peek().charAt(0))>=precedence(token))){   //      while(top of stack is an operator with greater or equal precedence)
+                    String operator = stack.pop();                                                  //          pop and add to postfix expression
                     postfix = postfix + operator;
                     if(i+1<input.length()){
-                        postfix = postfix + " ";                                        //  add a space after the operand unless it is the end of the string
+                        postfix = postfix + " ";                                                    //  add a space after the operand unless it is the end of the string
                     }
                 }
                 stack.push(String.valueOf(token));
             }
-            else if(token == ')'){                                                      // else if(token == ")")
-                while(stack.peek() != "("){                                             //       while(top of stack != "(")
-                    String character = stack.pop();                                     //           pop and add to postfix expression
+            else if(token == ')'){                                                                  // else if(token == ")")
+                while(stack.peek()!="(" && stack.size()>0){                                         //       while(top of stack != "(")
+                    String character = stack.pop();                                                 //           pop and add to postfix expression
                     postfix = postfix + character;
                     if(i+1<input.length()){
-                        postfix = postfix + " ";                                        //  add a space after the operand unless it is the end of the string
+                        postfix = postfix + " ";                                                    //  add a space after the operand unless it is the end of the string
                     }
                 }
-                String bracket = stack.pop();                                           //       pop "("
+                String bracket = stack.pop();                                                       //       pop "("
             }
         }
-        while(!stack.empty()){                                                          // while(stack is not empty)
-            String character = stack.pop();                                             //       pop remaining characters and add to postfix expression
+        while(!stack.empty()){                                                                      // while(stack is not empty)
+            String character = stack.pop();                                                         //       pop remaining characters and add to postfix expression
             postfix = postfix + " " + character;
         }
         return postfix;
@@ -228,9 +227,6 @@ static boolean isValidNumberCheck(char input){
         }
         else if(operator=='*' || operator=='/'){
             return 2;
-        }
-        else if(operator=='^'){
-            return 3;
         }
         else{
             return 0;
