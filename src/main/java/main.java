@@ -6,7 +6,6 @@ public class main {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);  // Create a Scanner object
 	    System.out.println("Welcome to Arshad Mohammed and Wen Geng Lin's Calculator ");
-        System.out.println("Plis don't enter negative numbers :) ");
         System.out.print("Enter input or type quit to exit: ");
         String userInput = input.nextLine();
 
