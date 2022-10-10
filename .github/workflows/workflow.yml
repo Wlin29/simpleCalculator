@@ -1,0 +1,76 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  Validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Clean the target file
+        run: mvn clean
+      - name: Validate the target files
+        run: mvn validate 
+
+  Run_Tests_on_Ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Clean the target file
+        run: mvn clean
+      - name: Validate the target files
+        run: mvn validate 
+      - name: Compile main.java
+        run: mvn compile
+      - name: Test calculatorTest.java
+        run: mvn test
+    
+  Run_Tests_On_Windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Clean the target file
+        run: mvn clean
+      - name: Validate the target files
+        run: mvn validate 
+      - name: Compile main.java
+        run: mvn compile
+      - name: Test calculatorTest.java
+        run: mvn test    
+
+  Run_Tests_On_Mac:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Clean the target file
+        run: mvn clean
+      - name: Validate the target files
+        run: mvn validate 
+      - name: Compile main.java
+        run: mvn compile
+      - name: Test calculatorTest.java
+        run: mvn test    
