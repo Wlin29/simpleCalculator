@@ -183,7 +183,7 @@ static boolean isValidNumberCheck(char input){
                 }
             }
             else if(token == '('){                                                                  // else if(token == "(")
-                stack.push("(");                                                               //       push "(" to the stack
+                stack.push("(");                                                               	    //       push "(" to the stack
             }
             else if(isValidOperatorCheck(token)){                                                   // else if(token is an operator)
                 while(stack.size()>0 && (precedence(stack.peek().charAt(0))>=precedence(token))){   //      while(top of stack is an operator with greater or equal precedence)
